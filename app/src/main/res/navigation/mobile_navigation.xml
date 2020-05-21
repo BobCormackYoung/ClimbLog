@@ -21,11 +21,27 @@
         android:id="@+id/navigation_activity"
         android:name="com.youngsoft.climblog.ui.activity.ActivityFragment"
         android:label="@string/title_activity"
-        tools:layout="@layout/fragment_activity" />
+        tools:layout="@layout/fragment_activity" >
+        <action
+            android:id="@+id/action_navigation_activity_to_navigation_addOutdoorClimb"
+            app:destination="@id/navigation_addOutdoorClimb" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_calendar"
         android:name="com.youngsoft.climblog.ui.calendar.CalendarFragment"
         android:label="@string/title_calendar"
         tools:layout="@layout/fragment_calendar" />
+
+    <fragment
+        android:id="@+id/navigation_addOutdoorClimb"
+        android:name="com.youngsoft.climblog.ui.addOutdoorClimb.AddOutdoorClimb"
+        android:label="fragment_add_outdoor_climb"
+        tools:layout="@layout/fragment_add_outdoor_climb" />
+
+    <fragment
+        android:id="@+id/navigation_addIndoorClimb"
+        android:name="com.youngsoft.climblog.ui.addIndoorClimb.AddIndoorClimb"
+        android:label="fragment_add_indoor_climb"
+        tools:layout="@layout/fragment_add_indoor_climb" />
 </navigation>

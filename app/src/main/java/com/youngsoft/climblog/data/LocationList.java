@@ -46,49 +46,45 @@ public class LocationList {
     public int getId() {
         return id;
     }
-
     public String getLocationName() {
         return locationName;
     }
-
     public int getClimbCount() {
         return climbCount;
     }
-
     public double getGpsLongitude() {
         return gpsLongitude;
     }
-
     public double getGpsLatitude() {
         return gpsLatitude;
     }
-
-    public boolean isGps() {
+    public boolean getIsGps() {
         return isGps;
+    }
+    public boolean getIsOutdoor() {
+        return isOutdoor;
     }
 
     public void setId(int id) {
         this.id = id;
     }
-
     public void setLocationName(String input) {
         locationName = input;
     }
-
     public void setClimbCount(int input) {
         climbCount = input;
     }
-
     public void setGpsLongitude(double input) {
         gpsLongitude = input;
     }
-
     public void setGpsLatitude(double input) {
         gpsLatitude = input;
     }
-
     public void setIsGps(boolean input) {
         isGps = input;
+    }
+    public void setIsOutdoor(boolean outdoor) {
+        isOutdoor = outdoor;
     }
 
 }

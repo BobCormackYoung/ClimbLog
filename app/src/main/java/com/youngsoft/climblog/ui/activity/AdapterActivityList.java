@@ -58,7 +58,6 @@ public class AdapterActivityList extends ListAdapter<ClimbLog, AdapterActivityLi
         holder.tvClimbDiscipline.setText("" + currentClimbLog.getClimbDisciplineCode());;
     }
 
-
     public class ClimbLogHolder extends RecyclerView.ViewHolder{
 
         TextView tvClimbId;
@@ -79,7 +78,7 @@ public class AdapterActivityList extends ListAdapter<ClimbLog, AdapterActivityLi
             tvGradeType=itemView.findViewById(R.id.tv_grade_type);
             tvGradeValue=itemView.findViewById(R.id.tv_grade_value);
             tvAscentType=itemView.findViewById(R.id.tv_ascent_type);
-            tvClimbDiscipline=itemView.findViewById(R.id.tv_climb_id);
+            tvClimbDiscipline=itemView.findViewById(R.id.tv_climb_discipline);
         }
     }
 
