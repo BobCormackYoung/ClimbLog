@@ -42,6 +42,7 @@
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@id/fab"
             app:fabSize="normal"
+            android:src="@drawable/plus"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             android:contentDescription="@null"

@@ -104,30 +104,15 @@ public class ActivityFragment extends Fragment {
         });
          **/
 
-        final ViewGroup fabContainer = (ViewGroup) view.findViewById(R.id.fab_container);
-        fab = (FloatingActionButton) view.findViewById(R.id.fab);
+        //find the viewgroup representing the float action buttons
+        //then find the actual buttons themselves
+        final ViewGroup fabContainer = view.findViewById(R.id.fab_container);
+        fab = view.findViewById(R.id.fab);
         fabAction1 = view.findViewById(R.id.fab_action_1);
-        fabAction1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.i("FAB TEST","fab1");
-            }
-        });
         fabAction2 = view.findViewById(R.id.fab_action_2);
-        fabAction2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.i("FAB TEST","fab2");
-            }
-        });
         fabAction3 = view.findViewById(R.id.fab_action_3);
-        fabAction3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.i("FAB TEST","fab3");
-            }
-        });
 
+        //assign onClick listeners to the action buttons
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -139,7 +124,28 @@ public class ActivityFragment extends Fragment {
                 }
             }
         });
+        fabAction1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i("FAB TEST","fab1");
+                navController.navigate(R.id.action_navigation_activity_to_navigation_addOutdoorClimb);
+            }
+        });
+        fabAction2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i("FAB TEST","fab2");
+                navController.navigate(R.id.action_navigation_activity_to_navigation_addOutdoorClimb);
+            }
+        });
+        fabAction3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i("FAB TEST","fab3");
+            }
+        });
 
+        //use onPreDrawListener to determine vertical offset position relative to FAB
         fabContainer.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
             @Override
             public boolean onPreDraw() {
@@ -157,31 +163,55 @@ public class ActivityFragment extends Fragment {
 
     }
 
+    /**
+     * method to collapse the floating action button
+     */
     private void collapseFab() {
+        //update FAB to be the animated minus - contains the rotation animations and start/stop SVG
         fab.setImageResource(R.drawable.animated_minus);
+        //new animator set to handle collapsing the multiple FABs
         AnimatorSet animatorSet = new AnimatorSet();
         animatorSet.playTogether(createCollapseAnimator(fabAction1, offset1),
                 createCollapseAnimator(fabAction2, offset2),
                 createCollapseAnimator(fabAction3, offset3));
+        //start animations
         animatorSet.start();
         animateFab();
     }
 
+    /**
+     * method to expand the floating action button
+     */
     private void expandFab() {
+        //update FAB to be the animated plus - contains the rotation animations and start/stop SVG
         fab.setImageResource(R.drawable.animated_plus);
+        //new animator set to handle collapsing the multiple FABs
         AnimatorSet animatorSet = new AnimatorSet();
         animatorSet.playTogether(createExpandAnimator(fabAction1, offset1),
                 createExpandAnimator(fabAction2, offset2),
                 createExpandAnimator(fabAction3, offset3));
+        //start animations
         animatorSet.start();
         animateFab();
     }
 
+    /**
+     * Create an animator to collapse the FAB views based on the view & the required offset
+     * @param view the view that needs animating
+     * @param offset the translation offset value
+     * @return
+     */
     private Animator createCollapseAnimator(View view, float offset) {
         return ObjectAnimator.ofFloat(view, TRANSLATION_Y, 0, offset)
                 .setDuration(getResources().getInteger(android.R.integer.config_mediumAnimTime));
     }
 
+    /**
+     * Create an animator to collapse the FAB views based on the view & the required offset
+     * @param view the view that needs animating
+     * @param offset the translation offset value
+     * @return
+     */
     private Animator createExpandAnimator(View view, float offset) {
         return ObjectAnimator.ofFloat(view, TRANSLATION_Y, offset, 0)
                 .setDuration(getResources().getInteger(android.R.integer.config_mediumAnimTime));
