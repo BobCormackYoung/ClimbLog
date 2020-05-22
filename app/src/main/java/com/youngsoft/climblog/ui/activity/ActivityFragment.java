@@ -3,12 +3,7 @@ package com.youngsoft.climblog.ui.activity;
 import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.PorterDuff;
 import android.graphics.drawable.Animatable;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,9 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
-import android.widget.ImageButton;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -27,12 +19,10 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.youngsoft.climblog.MainActivity;
 import com.youngsoft.climblog.R;
 import com.youngsoft.climblog.data.ClimbLog;
 
@@ -163,12 +153,19 @@ public class ActivityFragment extends Fragment {
 
     }
 
+    @Override
+    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
+        super.onViewStateRestored(savedInstanceState);
+        //reset expanded status when resuming
+        expanded = false;
+    }
+
     /**
      * method to collapse the floating action button
      */
     private void collapseFab() {
         //update FAB to be the animated minus - contains the rotation animations and start/stop SVG
-        fab.setImageResource(R.drawable.animated_minus);
+        fab.setImageResource(R.drawable.ic_animated_minus);
         //new animator set to handle collapsing the multiple FABs
         AnimatorSet animatorSet = new AnimatorSet();
         animatorSet.playTogether(createCollapseAnimator(fabAction1, offset1),
@@ -184,7 +181,7 @@ public class ActivityFragment extends Fragment {
      */
     private void expandFab() {
         //update FAB to be the animated plus - contains the rotation animations and start/stop SVG
-        fab.setImageResource(R.drawable.animated_plus);
+        fab.setImageResource(R.drawable.ic_animated_plus);
         //new animator set to handle collapsing the multiple FABs
         AnimatorSet animatorSet = new AnimatorSet();
         animatorSet.playTogether(createExpandAnimator(fabAction1, offset1),
@@ -217,7 +214,11 @@ public class ActivityFragment extends Fragment {
                 .setDuration(getResources().getInteger(android.R.integer.config_mediumAnimTime));
     }
 
+    /**
+     * Animate the floating action button
+     */
     private void animateFab() {
+        //get the drawable for the floating action button. If it is animatable, start the animation
         Drawable drawable = fab.getDrawable();
         if (drawable instanceof Animatable) {
             ((Animatable) drawable).start();

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@drawable/ic_plus">
+    <target
+        android:animation="@animator/ani_rotate_clockwise"
+        android:name="plus_group" />
+    <target
+        android:animation="@animator/ani_plus_to_minus"
+        android:name="plus_path" />
+</animated-vector>
